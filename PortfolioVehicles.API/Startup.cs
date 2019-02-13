@@ -12,7 +12,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using PortfolioVehicles.API.Core.Repositories;
 using PortfolioVehicles.API.Persistence;
+using PortfolioVehicles.API.Persistence.Repositories;
 
 namespace PortfolioVehicles.API
 {
@@ -31,6 +33,10 @@ namespace PortfolioVehicles.API
             services.AddDbContext<PortfolioVehiclesDbContext>(builder =>
                 builder.UseSqlServer(Configuration["ConnectionString:Default"]));
             services.AddAutoMapper();
+
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped<IMakeRepository, MakeRepository>();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

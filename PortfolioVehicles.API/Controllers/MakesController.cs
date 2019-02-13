@@ -5,6 +5,8 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PortfolioVehicles.API.Controllers.Resources;
+using PortfolioVehicles.API.Core.Models;
+using PortfolioVehicles.API.Core.Repositories;
 using PortfolioVehicles.API.Persistence;
 
 namespace PortfolioVehicles.API.Controllers
@@ -15,9 +17,11 @@ namespace PortfolioVehicles.API.Controllers
     {
         private readonly PortfolioVehiclesDbContext context;
         private readonly IMapper mapper;
+        private readonly IMakeRepository repo;
 
-        public MakesController(PortfolioVehiclesDbContext context, IMapper mapper)
+        public MakesController(PortfolioVehiclesDbContext context, IMapper mapper, IMakeRepository repo)
         {
+            this.repo = repo;
             this.mapper = mapper;
             this.context = context;
         }
@@ -25,7 +29,7 @@ namespace PortfolioVehicles.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetMakes()
         {
-            var makes = await context.Makes.Include(m => m.Models).ToListAsync();
+            var makes = await repo.GetAll();
             var makeResources = mapper.Map<IEnumerable<MakeResource>>(makes);
             return Ok(makeResources);
         }
