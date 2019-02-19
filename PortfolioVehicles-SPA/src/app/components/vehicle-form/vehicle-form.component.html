@@ -4,11 +4,7 @@
     <div class="form-group">
       <label for="makes">Make:</label>
       <select class="form-control" id="makes">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
+        <option *ngFor="let make of makes" [value]="make.id">{{make.name}}</option>
       </select>
     </div>
 

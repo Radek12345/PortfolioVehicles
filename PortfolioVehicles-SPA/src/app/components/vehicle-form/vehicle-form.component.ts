@@ -1,3 +1,4 @@
+import { VehicleService } from './../../services/vehicle.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./vehicle-form.component.css']
 })
 export class VehicleFormComponent implements OnInit {
+  makes: any;
 
-  constructor() { }
+  constructor(private vehicleService: VehicleService) { }
 
   ngOnInit() {
+    this.loadMakes();
+  }
+
+  loadMakes() {
+    this.vehicleService.getMakes().subscribe(makes => {
+      this.makes = makes;
+    });
   }
 
 }
