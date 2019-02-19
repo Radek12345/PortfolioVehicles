@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { Make } from '../models/Make';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,6 @@ export class VehicleService {
   constructor(private http: HttpClient) { }
 
   getMakes() {
-    return this.http.get(this.baseUrl + 'makes');
+    return this.http.get<Make[]>(this.baseUrl + 'makes');
   }
 }
