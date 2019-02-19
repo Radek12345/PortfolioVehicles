@@ -14,11 +14,13 @@ export class VehicleFormComponent implements OnInit {
 
   makes: Make[];
   models: Base[];
+  features: Base[];
 
   constructor(private vehicleService: VehicleService) { }
 
   ngOnInit() {
     this.loadMakes();
+    this.loadFeatures();
   }
 
   loadMakes() {
@@ -30,6 +32,12 @@ export class VehicleFormComponent implements OnInit {
   loadModels() {
     // tslint:disable-next-line:triple-equals
     this.models = this.makes.find(m => m.id == this.vehicle.makeId).models;
+  }
+
+  loadFeatures() {
+    this.vehicleService.getFeatures().subscribe(features => {
+      this.features = features;
+    });
   }
 
 }

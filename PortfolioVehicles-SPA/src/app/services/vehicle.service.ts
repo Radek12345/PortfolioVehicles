@@ -1,3 +1,4 @@
+import { Base } from './../models/Base';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -13,5 +14,9 @@ export class VehicleService {
 
   getMakes() {
     return this.http.get<Make[]>(this.baseUrl + 'makes');
+  }
+
+  getFeatures() {
+    return this.http.get<Base[]>(this.baseUrl + 'features');
   }
 }
