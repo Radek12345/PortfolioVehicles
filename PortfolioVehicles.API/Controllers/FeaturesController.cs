@@ -15,16 +15,13 @@ namespace PortfolioVehicles.API.Controllers
     [ApiController]
     public class FeaturesController : ControllerBase
     {
-        private readonly PortfolioVehiclesDbContext context;
         private readonly IMapper mapper;
         private readonly IRepository<Feature> repo;
 
-        public FeaturesController(PortfolioVehiclesDbContext context, IMapper mapper,
-            IRepository<Feature> repo)
+        public FeaturesController(IMapper mapper, IRepository<Feature> repo)
         {
             this.repo = repo;
             this.mapper = mapper;
-            this.context = context;
         }
 
         [HttpGet]

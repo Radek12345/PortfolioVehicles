@@ -15,15 +15,13 @@ namespace PortfolioVehicles.API.Controllers
     [ApiController]
     public class MakesController : ControllerBase
     {
-        private readonly PortfolioVehiclesDbContext context;
         private readonly IMapper mapper;
         private readonly IMakeRepository repo;
 
-        public MakesController(PortfolioVehiclesDbContext context, IMapper mapper, IMakeRepository repo)
+        public MakesController(IMapper mapper, IMakeRepository repo)
         {
             this.repo = repo;
             this.mapper = mapper;
-            this.context = context;
         }
 
         [HttpGet]
